@@ -9,6 +9,7 @@ The race courses can be customized by changing the array of checkpoints. So far,
 My Contributions:
 - Added the ability to abandon a race before finishing
 - Changed the timer to display minutes and seconds
+- Fixed a bug that caused certain sound effects to become louder with after each race
 - Added the ability to have more than one course (Originally hardcoded to use an array of checkpoints that make one course)
 - Now keeps the player's vehicle in place during the countdown
 - Created a workaround to fix a crash after finishing a race

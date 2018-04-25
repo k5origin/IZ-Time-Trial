@@ -82,7 +82,7 @@ function preRace()
             end
 		end	
 			-- This should be blips[2] instead of hardcoded coordinates
-			DrawMarker(1,  -1045.4481201172, 6898.9038085938, 34.961235046387 - 1, 0, 0, 0, 0, 0, 0, 3.0001, 3.0001, 1.5001, 255, 165, 0,165, 0, 0, 0,0) -- Akina Downhill
+			DrawMarker(1,  -1045.4481201172, 6898.9038085938, 34.961235046387 - 1, 0, 0, 0, 0, 0, 0, 3.0001, 3.0001, 1.5001, 255, 165, 0,165, 0, 0, 0,0) -- Akina Uphill
         if GetDistanceBetweenCoords( -1045.4481201172, 6898.9038085938, 34.961235046387, GetEntityCoords(LocalPed())) < 50.0 then
             	Draw3DText( -1045.4481201172, 6898.9038085938, 34.961235046387, "Akina",7,0.3,0.2)
             	Draw3DText( -1045.4481201172, 6898.9038085938, 34.961235046387 - .5, "Uphill",7,0.3,0.2)
@@ -100,7 +100,7 @@ function preRace()
 						track[k] = v
 					end
 					 SetEntityHeading(PlayerPedId(), 110.0)
-					trackName = "Akina Downhill"
+					trackName = "Akina Uphill"
                     TriggerEvent("cRace:TPAll")
                 else
                     return
@@ -163,6 +163,7 @@ AddEventHandler("fs_race:BeginRace", function()
                 cP2 = 2
                 TriggerEvent("chatMessage", "Server", {0,0,0}, string.format("You abandoned the race... " ))
                 preRace()
+				break
 			end
 			
 			
@@ -188,6 +189,7 @@ AddEventHandler("fs_race:BeginRace", function()
                         cP2 = 2
                         TriggerEvent("chatMessage", "Server", {0,0,0}, string.format("Finished " .. trackName .. " with a time of " .. formatTimer(startTime, GetGameTimer())))
                         preRace()
+						break
                     end
                     else
                 end
@@ -211,7 +213,7 @@ function formatTimer(startTime, currTime)
         local ms = string.sub(newString, -3, -2)
         local sec = string.sub(newString, -5, -4)
         --local min = string.sub(newString, -7, -6)
-        newString = string.format("%s:%02s.%s", minutes, sec, ms)
+        newString = string.format("%s:%02s.%s", min, sec, ms)
     return newString
 end
 
@@ -267,4 +269,7 @@ Citizen.CreateThread(function()
         EndTextCommandSetBlipName(info.blip)
     end
 end)
+
+
+
 
