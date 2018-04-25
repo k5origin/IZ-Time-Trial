@@ -19,5 +19,5 @@ Installation:
 Place __resource.lua and client.lua into the resources/IZ-Time-Trial folder. 
 add "start IZ-Time-Trial" to the server.cfg
 
-When the track is ready, restart the resource approach the marker in any vehicle and press UP to initiate a race.
+When the track is ready, approach the marker in any vehicle and press UP to initiate a race. Note, if FXServer is already running, changes can be applied real time by restarting the resource.
 
