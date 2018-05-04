@@ -42,9 +42,27 @@ AkinaUphill[3] =  		{ x = -3276.6650390625, y = 5670.0283203125, z = 398.8111877
 AkinaUphill[4] =  		{ x = -3303.3737792969, y = 4840.3310546875, z = 414.9846496582, type = 9}
 AkinaUphill[5] =  		{ x = -3303.3737792969, y = 4840.3310546875, z = 414.9846496582, type = 9}
 
+local NaboRevFull = {} -- Nabo
+NaboRevFull[1] = 		{ x = 234.30584716797,	y = 1362.2397460938,	z = 238.67668151855,	type = 5}
+NaboRevFull[2] = 		{ x = -402.07513427734,	y = 1904.7188720703,	z = 206.61959838867,	type = 5}
+NaboRevFull[3] = 		{ x = -799.19537353516,	y = 1665.6009521484,	z = 198.29002380371,	type = 5}
+NaboRevFull[4] = 		{ x = -473.75964355469,	y = 2813.3510742188,	z = 37.270782470703,	type = 5}
+NaboRevFull[5] = 		{ x = -2081.3818359375,	y = 2283.5346679688,	z = 38.943672180176,	type = 5}
+NaboRevFull[6] = 		{ x = -1808.1064453125,	y = 1900.4084472656,	z = 147.13417053223,	type = 5}
+NaboRevFull[7] = 		{ x = -2628.5380859375,	y = 1406.24609375,		z = 134.25791931152,	type = 5}
+NaboRevFull[8] = 		{ x = -1631.8984375,	y = 989.05895996094,	z = 152.51168823242,	type = 5}
+NaboRevFull[9] = 		{ x = -724.00225830078,	y = 1013.047668457,		z = 238.73815917969,	type = 5}
+NaboRevFull[10] = 		{ x = -718.95043945313,	y = 1169.8741455078,	z = 263.39270019531,	type = 5}
+NaboRevFull[11] = 		{ x = -460.93792724609,	y = 1343.0961914063,	z = 304.44055175781,	type = 5}
+NaboRevFull[12] = 		{ x = -386.99127197266,	y = 1177.7064208984,	z = 325.11627197266,	type = 9}
+NaboRevFull[13] = 		{ x = -386.99127197266,	y = 1177.7064208984,	z = 325.11627197266,	type = 9}
+
+
+
 local blips = {}
 	blips[1] = 	{title="Akina Downhill", colour=5, id=315, x= -3303.3737792969, y= 4840.3310546875, z= 414.9846496582}
-    blips[2] =		{title="Akina Uphill", colour=5, id=315, x= -1045.4481201172, y= 6898.9038085938, z= 34.961235046387}
+    blips[2] =	{title="Akina Uphill", colour=5, id=315, x= -1045.4481201172, y= 6898.9038085938, z= 34.961235046387}
+    blips[3] =	{title="Nobopotax Reverse (Full Circuit)", colour=5, id=315, x=-389.02478027344, y = 1179.1552734375, z = 325.10546875,}
 
 
 
@@ -74,7 +92,7 @@ function preRace()
 						track[k] = v
 					end
 					 SetEntityHeading(PlayerPedId(), 345.0)
-					trackName = "Akina Downhill"
+					trackName = "Akina Downhill" -- Use blips title instead
                     TriggerEvent("cRace:TPAll")
                 else
                     return
@@ -106,11 +124,44 @@ function preRace()
                     return
                 end
             end
-        
-			
-			
+		end
+
+		
+			-- This should be blips[3] instead of hardcoded coordinates
+			DrawMarker(1,  -389.02478027344, 1179.1552734375, 325.10546875 - 1, 0, 0, 0, 0, 0, 0, 3.0001, 3.0001, 1.5001, 255, 165, 0,165, 0, 0, 0,0) -- Nabo Reverse Full Track
+        if GetDistanceBetweenCoords( -389.02478027344, 1179.1552734375, 325.10546875, GetEntityCoords(LocalPed())) < 50.0 then
+            	Draw3DText( -389.02478027344, 1179.1552734375, 325.10546875, "Nobopotax Reverse",7,0.3,0.2)
+            	Draw3DText( -389.02478027344, 1179.1552734375, 325.10546875 - .5, "(Full Circuit)",7,0.3,0.2)
         end
-    end
+        if GetDistanceBetweenCoords(-389.02478027344, 1179.1552734375, 325.10546875, GetEntityCoords(LocalPed())) < 2.0 then
+            if (IsControlJustReleased(1, 27)) then
+                if IsRacing == false then
+                    IsRacing = true
+					
+					for k in pairs(track) do
+						track[k] = nil
+					end
+					
+					for k,v in pairs(NaboRevFull) do
+						track[k] = v
+					end
+					 SetEntityHeading(PlayerPedId(), 255.0)
+					trackName = "Nobopotax Reverse (Full Circuit)"
+                    TriggerEvent("cRace:TPAll")
+                else
+                    return
+                end
+            end
+        
+		end
+		
+		
+		
+		
+		
+		
+		
+    end -- NO TRACK DATA HERE
 end
 
 RegisterNetEvent("cRace:TPAll")
